@@ -10,3 +10,9 @@ A simple, interactive Todo List built with React using useImmerReducer for advan
 - Displays a timestamp of when each todo was added
 - Controlled form input and state updates
 - Powered by useImmerReducer for cleaner immutable state logic
+
+## Tech Stack
+- React
+- use-immer
+- JavaScript(ES6+)
+- CSS

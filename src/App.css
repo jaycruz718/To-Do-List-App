@@ -50,9 +50,21 @@ form button:hover {
   display: flex;
   align-items: center;
   gap: 10px;
-  background: #f4f4f4;
+  background: green;
   padding: 8px;
   border-radius: 4px;
+  transition: all 0.3s ease;
+  opacity: 1;
+}
+
+.todo-item-enter {
+  opacity: 0;
+  transform: translateY(-10px);
+}
+
+.todo-item-enter-active {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 .todo-item input[type="text"] {
