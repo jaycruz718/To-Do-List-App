@@ -1,34 +1,12 @@
-
 function ToDoItem({ todo, dispatch, ACTIONS }) {
-  function handleToggle() {
-    dispatch({ type: ACTIONS.TOGGLE, payload: { id: todo.id } });
-  }
-
-  function handleDelete() {
-    dispatch({ type: ACTIONS.DELETE, payload: { id: todo.id } });
-  }
-
-  function handleEditToggle() {
-    dispatch({ type: ACTIONS.START_EDIT, payload: { id: todo.id } });
-  }
-
-  function handleEditChange(e) {
-    dispatch({
-      type: ACTIONS.EDIT_CHANGE,
-      payload: { id: todo.id, value: e.target.value },
-    });
-  }
-
-  function handleSave() {
-    dispatch({ type: ACTIONS.SAVE_EDIT, payload: { id: todo.id } });
-  }
-
   return (
     <div className="todo-item">
       <input
         type="checkbox"
         checked={todo.complete}
-        onChange={handleToggle}
+        onChange={() =>
+          dispatch({ type: ACTIONS.TOGGLE, payload: { id: todo.id } })
+        }
       />
 
       {todo.isEditing ? (
@@ -36,23 +14,44 @@ function ToDoItem({ todo, dispatch, ACTIONS }) {
           <input
             type="text"
             value={todo.editValue}
-            onChange={handleEditChange}
+            onChange={e =>
+              dispatch({
+                type: ACTIONS.EDIT_CHANGE,
+                payload: { id: todo.id, value: e.target.value },
+              })
+            }
           />
-          <button onClick={handleSave}>Save</button>
+          <button
+            onClick={() =>
+              dispatch({ type: ACTIONS.SAVE_EDIT, payload: { id: todo.id } })
+            }
+          >
+            Save
+          </button>
         </>
       ) : (
         <>
           <span
             style={{
               textDecoration: todo.complete ? 'line-through' : 'none',
-              marginLeft: '10px',
-              flexGrow: 1,
+              flex: 1,
             }}
           >
             {todo.name}
           </span>
-          <button onClick={handleEditToggle}>Edit</button>
-          <button onClick={handleDelete} disabled={!todo.complete}>
+          <button
+            onClick={() =>
+              dispatch({ type: ACTIONS.START_EDIT, payload: { id: todo.id } })
+            }
+          >
+            Edit
+          </button>
+          <button
+            disabled={!todo.complete}
+            onClick={() =>
+              dispatch({ type: ACTIONS.DELETE, payload: { id: todo.id } })
+            }
+          >
             Delete
           </button>
         </>
